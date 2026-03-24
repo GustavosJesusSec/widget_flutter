@@ -1,35 +1,37 @@
 ## 1. ##
 ```mermaid
 graph TD
+    A[Scaffold] --> B[AppBar]
+    A --> C[Body: SingleChildScrollView]
+    A --> D[FloatingActionButton]
+    A --> E[BottomNavigationBar]
 
-A[Scaffold] --> B[AppBar]
-A --> C[Body]
-A --> D[FloatingActionButton]
+    B --> B1[Row]
+    B1 --> B1a[CircleAvatar: Foto Usuário]
+    B1 --> B1b[Column: Saudação/Nome]
+    B1 --> B1c[Badge: Notificações]
 
-C --> E[SingleChildScrollView]
-E --> F[Column]
+    C --> F[Padding]
+    F --> G[Column]
 
-F --> G[Header / Greeting + Search]
-F --> H[CategorySection]
-F --> I[BannerCarousel]
-F --> J[PopularSection]
-F --> K[NearbySection]
+    G --> H[TextField: Busca de produtos]
+    G --> I[Seção: Categorias]
+    I --> I1[ListView.horizontal]
+    I1 --> I2[Widget Extraído: Cartaocategoria]
 
-H --> H1[CategoryList - Horizontal ListView]
-H1 --> H2[CategoryItem]
+    G --> J[Widget Extraído: BannerCarrossel]
+    J --> J1[PageView]
+    J --> J2[Indicador de Pontos/Dots]
 
-I --> I1[PageView]
-I1 --> I2[BannerItem]
+    G --> K[Seção: Mais pedidos]
+    K --> K1[ListView.horizontal]
+    K1 --> K2[Widget Extraído: CartaoProdutoPopular]
 
-J --> J1[SectionHeader]
-J --> J2[ProductList Horizontal]
-J2 --> J3[ProductCard]
+    G --> L[Seção: Perto de você]
+    L --> L1[ListView.vertical: shrinkWrap true]
+    L1 --> L2[Widget Extraído: CardEstabelecimento]
 
-K --> K1[SectionHeader]
-K --> K2[ProductList Vertical]
-K2 --> K3[ProductTile]
-
-D --> D1[Badge]
+    D --> D1[Badge: Itens no Carrinho]
 ```
 
 ## 2. ##
