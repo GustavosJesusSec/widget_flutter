@@ -1,18 +1,39 @@
 import 'package:flutter/material.dart';
+
 void main() {
-  runApp(TelaLogin());
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Login',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const TelaLogin(),
+    );
+  }
 }
 
 class TelaLogin extends StatefulWidget {
+  const TelaLogin({super.key});
+
   @override
-  _TelaLoginState createState() => _TelaLoginState();
+  State<TelaLogin> createState() => _TelaLoginState();
 }
 
 class _TelaLoginState extends State<TelaLogin> {
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
 
-  bool senhaVisivel = false;
+  bool _senhaVisivel = false;
+
+  void _handleLogin() {
+    print(emailController.text);
+    print(senhaController.text);
+  }
 
   @override
   void dispose() {
@@ -23,60 +44,116 @@ class _TelaLoginState extends State<TelaLogin> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 64),
 
-              SizedBox(height: 40),
-
-              Center(child: Icon(Icons.person, size: 80)),
-
-              SizedBox(height: 20),
-
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
-              ),
-
-              SizedBox(height: 10),
-
-              TextField(
-                controller: senhaController,
-                obscureText: !senhaVisivel,
-                decoration: InputDecoration(
-                  labelText: 'Senha',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      senhaVisivel
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        senhaVisivel = !senhaVisivel;
-                      });
-                    },
+                // Logo Section
+                Center(
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Can i see your password?",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Image(
+                        image: AssetImage('assets/images/cat-see-you.jpg'),
+                        width: 150,
+                      ),
+                    ],
                   ),
                 ),
-              ),
 
-              SizedBox(height: 20),
+                const SizedBox(height: 40),
 
-              ElevatedButton(
-                onPressed: () {
-                  print(emailController.text);
-                  print(senhaController.text);
-                },
-                child: Text('Entrar'),
-              ),
-            ],
+                // Título
+                const Text(
+                  'Bem-vindo de volta',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 8),
+
+                const Text('Acesse sua conta para continuar'),
+
+                const SizedBox(height: 32),
+
+                // Email
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'E-mail',
+                    prefixIcon: Icon(Icons.email_outlined),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                // Senha
+                TextField(
+                  controller: senhaController,
+                  obscureText: !_senhaVisivel,
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _senhaVisivel ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _senhaVisivel = !_senhaVisivel;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text('Esqueci minha senha'),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                ElevatedButton(
+                  onPressed: _handleLogin,
+                  child: const Text('Entrar'),
+                ),
+
+                const SizedBox(height: 16),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Nao tem conta? '),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Cadastre-se'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-} 
+}
