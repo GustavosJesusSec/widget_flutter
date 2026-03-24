@@ -1,41 +1,42 @@
 ## 1. ##
 ```mermaid
-graph TD
+flowchart TD
 
-A[Scaffold] --> B[AppBar]
-A --> C[Body]
-A --> D[BottomActionBar]
+    A[Scaffold] --> B[AppBar]
+    A --> D[Body - SingleChildScrollView]
+    
+    B --> C1[IconButton - Voltar]
+    B --> C2["Text - Pedido"]
 
-B --> B1[BackButton]
-B --> B2[Title]
-B --> B3[FavoriteButton]
+    D --> E[Column]
 
-C --> E[Column]
+    E --> F[Card - Status]
+    F --> F1[Column]
+    F1 --> F1a[Row: Icone Cozinheiro + Text: Em preparo]
+    F1 --> F1b[LinearProgressIndicator]
+    F1 --> F1c[Row: Etapas Confirm./Preparo/Saiu/Entregue]
 
-E --> F[Expanded]
-F --> G[SingleChildScrollView]
+    E --> G[Card - Itens do Pedido]
+    G --> H[Padding]
+    H --> I[Column]
+    I --> I1["Text - Itens do pedido"]
+    I --> I2[Row: 2x Pizza Margherita + Preço]
+    I --> I3[Row: 1x Refrigerante + Preço]
+    I --> I4[Divider]
+    I --> I5[Row: Subtotal + Valor]
+    I --> I6[Row: Taxa de entrega + Valor]
+    I --> I7["Text: Total + R$ 102,80"]
 
-G --> H[Column]
+    E --> J[Card - Endereço de Entrega]
+    J --> J1[ListTile]
+    J1 --> J1a[Icon - Mapa/Localização]
+    J1 --> J1b["Text - Rua das Flores, 123..."]
 
-H --> I[ProductImage]
-H --> J[ProductInfo]
-H --> K[RatingRow]
-H --> L[DescriptionSection]
-H --> M[IngredientsSection]
-
-D --> N[AddToCartButton]
-
-J --> J1[ProductName]
-J --> J2[Price]
-
-K --> K1[StarsRow]
-K --> K2[ReviewText]
-
-L --> L1[SectionTitle]
-L --> L2[DescriptionText]
-
-M --> M1[SectionTitle]
-M --> M2[IngredientsText]
+    E --> K[Card - Entregador]
+    K --> L[ListTile]
+    L --> L1[CircleAvatar - Foto Carlos Silva]
+    L --> L2["Text - Carlos Silva [fone] / Entregador"]
+    L --> L3[IconButton - Telefone]
 ```
 
 
